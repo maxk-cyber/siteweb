@@ -10,8 +10,12 @@ brochure. It includes:
 
 - An interactive readiness scan with a shareable recommendation summary.
 - A rotating market-signal gallery for current buyer and threat pressures.
+- A Launch Validator that checks public URL, HTTPS, security contact, privacy,
+  auth/data fit, proof URLs, and copyable validation summaries.
 - A Trust Packet Studio that tailors evidence bundles, objection answers, and
   next steps for different buyer moments.
+- A persistent Action Plan Builder with scenario-specific tasks, completion
+  tracking, custom tasks, and Markdown copy/download.
 - A guided launch-hardening flow that explains how an engagement works.
 - Service cards focused on buyer confidence, launch hardening, and incident
   readiness.

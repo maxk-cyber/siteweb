@@ -1,4 +1,6 @@
+import { ActionPlanBuilder } from './components/ActionPlanBuilder';
 import { LaunchNavigator } from './components/LaunchNavigator';
+import { LaunchValidator } from './components/LaunchValidator';
 import { ReadinessScanner } from './components/ReadinessScanner';
 import { SignalCarousel } from './components/SignalCarousel';
 import { TrustPacketStudio } from './components/TrustPacketStudio';
@@ -20,7 +22,9 @@ function App() {
           <div className="nav-links">
             <a href="#signals">Signals</a>
             <a href="#services">Services</a>
+            <a href="#validator">Validator</a>
             <a href="#proof-studio">Proof Studio</a>
+            <a href="#action-plan">Action Plan</a>
             <a href="#contact">Contact</a>
           </div>
         </nav>
@@ -34,11 +38,11 @@ function App() {
               a momentum asset for founders, agencies, and growth teams.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#scanner">
-                Run the trust scan
+              <a className="button button-primary" href="#action-plan">
+                Build an action plan
               </a>
-              <a className="button button-ghost" href="#services">
-                Explore services
+              <a className="button button-ghost" href="#scanner">
+                Run the trust scan
               </a>
             </div>
 
@@ -87,7 +91,11 @@ function App() {
         </div>
       </section>
 
+      <LaunchValidator />
+
       <TrustPacketStudio />
+
+      <ActionPlanBuilder />
 
       <LaunchNavigator />
 
@@ -100,7 +108,7 @@ function App() {
             map and the next trust-building sprint.
           </p>
         </div>
-        <a className="button button-primary" href="mailto:hello@maxk-cyber.example?subject=Launch%20readiness%20scan">
+        <a className="button button-primary" href="mailto:hello@maxk-cyber.com?subject=Launch%20readiness%20scan">
           Start a readiness conversation
         </a>
       </section>
