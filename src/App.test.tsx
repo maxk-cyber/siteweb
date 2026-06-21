@@ -44,9 +44,9 @@ describe('App', () => {
 
   it('copies a shareable scanner summary when the clipboard is available', async () => {
     const writeText = vi.fn().mockResolvedValue(undefined);
-    Object.defineProperty(navigator, 'clipboard', {
+    Object.defineProperty(window.navigator, 'clipboard', {
       configurable: true,
-      value: { writeText },
+      get: () => ({ writeText }),
     });
 
     const user = userEvent.setup();
