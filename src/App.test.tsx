@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { ActionPlanBuilder } from './components/ActionPlanBuilder';
 import { LaunchValidator } from './components/LaunchValidator';
+import { QuestionnaireAnswerDesk } from './components/QuestionnaireAnswerDesk';
 import { ReadinessScanner } from './components/ReadinessScanner';
 import { TrustPacketStudio } from './components/TrustPacketStudio';
 
@@ -123,6 +124,35 @@ describe('App', () => {
 
     expect(writeText).toHaveBeenCalledWith(expect.stringContaining('For the sales champion'));
     expect(screen.getByRole('button', { name: /copied/i })).toBeInTheDocument();
+  });
+
+  it('filters and copies questionnaire answer desk content', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+
+    const user = userEvent.setup();
+    render(<QuestionnaireAnswerDesk clipboard={{ writeText }} />);
+
+    expect(screen.getByText(/How do you control privileged access to production systems/i)).toBeInTheDocument();
+    expect(screen.getByText(/AI impersonation verification ritual/i)).toBeInTheDocument();
+
+    await user.selectOptions(screen.getByLabelText(/review audience/i), 'regulated-procurement');
+    await user.selectOptions(screen.getByLabelText(/evidence maturity/i), 'audit-ready');
+    await user.selectOptions(screen.getByLabelText(/question focus/i), 'incident');
+
+    expect(
+      screen.getByText(/what happens in the first hour of a suspected security incident/i),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Audit-ready / Incident response')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: /copy answer$/i }));
+    expect(writeText).toHaveBeenCalledWith(expect.stringContaining('First-hour response card'));
+    expect(screen.getByRole('button', { name: /answer copied/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: /copy answer pack/i }));
+    expect(writeText).toHaveBeenCalledWith(
+      expect.stringContaining('# Regulated procurement Questionnaire Answer Pack'),
+    );
+    expect(screen.getByRole('button', { name: /pack copied/i })).toBeInTheDocument();
   });
 
   it('builds a persistent action plan with custom tasks and Markdown copy', async () => {

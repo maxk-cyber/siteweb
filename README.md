@@ -14,6 +14,8 @@ brochure. It includes:
   auth/data fit, proof URLs, and copyable validation summaries.
 - A Trust Packet Studio that tailors evidence bundles, objection answers, and
   next steps for different buyer moments.
+- A Questionnaire Answer Desk that turns common buyer security-review questions
+  into evidence-backed, copyable answers and trust-center asset recommendations.
 - A persistent Action Plan Builder with scenario-specific tasks, completion
   tracking, custom tasks, and Markdown copy/download.
 - A guided launch-hardening flow that explains how an engagement works.
