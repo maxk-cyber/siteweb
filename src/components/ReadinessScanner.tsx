@@ -62,12 +62,14 @@ export function ReadinessScanner() {
   const shareSummary = `${result.tier} (${result.score}/100): ${result.headline} ${result.recommendation}`;
 
   const copySummary = async () => {
-    if (!navigator.clipboard) {
+    const clipboard = window.navigator.clipboard;
+
+    if (!clipboard) {
       setCopyStatus('Summary ready to copy');
       return;
     }
 
-    await navigator.clipboard.writeText(shareSummary);
+    await clipboard.writeText(shareSummary);
     setCopyStatus('Copied');
   };
 
