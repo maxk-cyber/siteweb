@@ -1,3 +1,4 @@
+import { ActionPlanBuilder } from './components/ActionPlanBuilder';
 import { LaunchNavigator } from './components/LaunchNavigator';
 import { ReadinessScanner } from './components/ReadinessScanner';
 import { SignalCarousel } from './components/SignalCarousel';
@@ -21,6 +22,7 @@ function App() {
             <a href="#signals">Signals</a>
             <a href="#services">Services</a>
             <a href="#proof-studio">Proof Studio</a>
+            <a href="#action-plan">Action Plan</a>
             <a href="#contact">Contact</a>
           </div>
         </nav>
@@ -34,11 +36,11 @@ function App() {
               a momentum asset for founders, agencies, and growth teams.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#scanner">
-                Run the trust scan
+              <a className="button button-primary" href="#action-plan">
+                Build an action plan
               </a>
-              <a className="button button-ghost" href="#services">
-                Explore services
+              <a className="button button-ghost" href="#scanner">
+                Run the trust scan
               </a>
             </div>
 
@@ -88,6 +90,8 @@ function App() {
       </section>
 
       <TrustPacketStudio />
+
+      <ActionPlanBuilder />
 
       <LaunchNavigator />
 

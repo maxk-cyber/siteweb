@@ -12,6 +12,8 @@ brochure. It includes:
 - A rotating market-signal gallery for current buyer and threat pressures.
 - A Trust Packet Studio that tailors evidence bundles, objection answers, and
   next steps for different buyer moments.
+- A persistent Action Plan Builder with scenario-specific tasks, completion
+  tracking, custom tasks, and Markdown copy/download.
 - A guided launch-hardening flow that explains how an engagement works.
 - Service cards focused on buyer confidence, launch hardening, and incident
   readiness.
