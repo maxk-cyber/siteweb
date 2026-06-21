@@ -55,6 +55,7 @@ a {
 }
 
 button,
+input,
 select {
   font: inherit;
 }
@@ -281,6 +282,8 @@ main {
 .service-card,
 .studio-card,
 .asset-card,
+.planner-card,
+.task-card,
 .flow-card,
 .cta-section {
   border: 1px solid var(--line);
@@ -340,7 +343,23 @@ main {
   color: var(--text);
 }
 
-.field select:focus {
+.field input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 13px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  outline: 0;
+  background: rgba(4, 9, 24, 0.84);
+  color: var(--text);
+}
+
+.field input::placeholder {
+  color: rgba(170, 184, 214, 0.62);
+}
+
+.field select:focus,
+.field input:focus {
   border-color: var(--cyan);
   box-shadow: 0 0 0 4px rgba(77, 232, 255, 0.12);
 }
@@ -708,6 +727,148 @@ main {
   padding-left: 22px;
 }
 
+.planner-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) minmax(440px, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+  padding-top: 48px;
+}
+
+.planner-card {
+  display: grid;
+  gap: 22px;
+  padding: clamp(22px, 4vw, 34px);
+  border-radius: 34px;
+}
+
+.planner-controls {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.5fr) 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.plan-summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid rgba(77, 232, 255, 0.24);
+  border-radius: 26px;
+  background: rgba(77, 232, 255, 0.07);
+}
+
+.plan-summary h3 {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: 1.16rem;
+  line-height: 1.25;
+}
+
+.plan-summary small {
+  color: var(--green);
+  font-weight: 900;
+}
+
+.plan-meter {
+  display: grid;
+  width: 82px;
+  height: 82px;
+  place-items: center;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at center, #0c142b 56%, transparent 58%),
+    conic-gradient(var(--green) var(--plan-progress), rgba(255, 255, 255, 0.12) 0);
+}
+
+.plan-meter span {
+  font-weight: 900;
+}
+
+.task-list {
+  display: grid;
+  gap: 12px;
+}
+
+.task-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: 24px;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.task-card:hover,
+.task-card:focus-within {
+  border-color: rgba(77, 232, 255, 0.5);
+  background:
+    linear-gradient(145deg, rgba(77, 232, 255, 0.12), transparent 36%),
+    var(--panel);
+  transform: translateY(-2px);
+}
+
+.task-card.done {
+  border-color: rgba(131, 255, 191, 0.42);
+  background:
+    linear-gradient(145deg, rgba(131, 255, 191, 0.14), transparent 36%),
+    rgba(12, 33, 35, 0.72);
+}
+
+.task-card input {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--green);
+}
+
+.task-card span {
+  display: grid;
+  gap: 8px;
+}
+
+.task-card strong {
+  color: var(--text);
+  font-size: 1.08rem;
+}
+
+.task-card small,
+.task-card em {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.task-card em {
+  font-style: normal;
+}
+
+.task-card b {
+  color: var(--green);
+  font-size: 0.86rem;
+}
+
+.custom-task-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: end;
+  padding-top: 4px;
+}
+
+.planner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
 .launch-flow {
   display: grid;
   grid-template-columns: minmax(0, 0.74fr) minmax(360px, 1fr);
@@ -792,6 +953,7 @@ main {
   .hero-grid,
   .signal-section,
   .trust-studio,
+  .planner-section,
   .launch-flow {
     grid-template-columns: 1fr;
   }
@@ -806,6 +968,10 @@ main {
 
   .asset-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .planner-controls {
+    grid-template-columns: 1fr;
   }
 
   .service-card {
@@ -837,6 +1003,8 @@ main {
   .score-panel,
   .packet-hero,
   .handoff-panel,
+  .plan-summary,
+  .custom-task-form,
   .signal-topline,
   .payoff {
     grid-template-columns: 1fr;
@@ -875,6 +1043,10 @@ main {
     margin: 0 auto;
   }
 
+  .plan-meter {
+    margin: 0 auto;
+  }
+
   .payoff strong {
     text-align: left;
   }
@@ -893,6 +1065,10 @@ main {
 
   .asset-card {
     min-height: auto;
+  }
+
+  .planner-actions {
+    flex-direction: column;
   }
 }
 
