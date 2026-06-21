@@ -10,6 +10,8 @@ brochure. It includes:
 
 - An interactive readiness scan with a shareable recommendation summary.
 - A rotating market-signal gallery for current buyer and threat pressures.
+- A Trust Packet Studio that tailors evidence bundles, objection answers, and
+  next steps for different buyer moments.
 - A guided launch-hardening flow that explains how an engagement works.
 - Service cards focused on buyer confidence, launch hardening, and incident
   readiness.
