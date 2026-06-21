@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { ActionPlanBuilder } from './components/ActionPlanBuilder';
+import { LaunchValidator } from './components/LaunchValidator';
 import { ReadinessScanner } from './components/ReadinessScanner';
 import { TrustPacketStudio } from './components/TrustPacketStudio';
 
@@ -83,6 +84,32 @@ describe('App', () => {
     await user.click(screen.getByRole('button', { name: /copy share summary/i }));
 
     expect(writeText).toHaveBeenCalledWith(expect.stringContaining('Trust Builder (63/100)'));
+    expect(screen.getByRole('button', { name: /copied/i })).toBeInTheDocument();
+  });
+
+  it('validates launch inputs and copies a validation summary', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+
+    const user = userEvent.setup();
+    render(<LaunchValidator clipboard={{ writeText }} />);
+
+    expect(screen.getByText('Valid launch candidate')).toBeInTheDocument();
+
+    await user.clear(screen.getByLabelText(/product url/i));
+    await user.type(screen.getByLabelText(/product url/i), 'http://localhost:3000?token=abc');
+    await user.clear(screen.getByLabelText(/security contact/i));
+    await user.type(screen.getByLabelText(/security contact/i), 'not-an-email');
+    await user.selectOptions(screen.getByLabelText(/data profile/i), 'regulated');
+    await user.selectOptions(screen.getByLabelText(/authentication/i), 'none');
+
+    expect(screen.getByText('Blocked')).toBeInTheDocument();
+    expect(screen.getByText(/the launch url is not https/i)).toBeInTheDocument();
+    expect(screen.getByText(/the security contact email is not valid/i)).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: /copy validation/i }));
+
+    expect(writeText).toHaveBeenCalledWith(expect.stringContaining('Status: Blocked'));
+    expect(writeText).toHaveBeenCalledWith(expect.stringContaining('token'));
     expect(screen.getByRole('button', { name: /copied/i })).toBeInTheDocument();
   });
 
