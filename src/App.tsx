@@ -1,6 +1,7 @@
 import { ActionPlanBuilder } from './components/ActionPlanBuilder';
 import { LaunchNavigator } from './components/LaunchNavigator';
 import { LaunchValidator } from './components/LaunchValidator';
+import { QuestionnaireAnswerDesk } from './components/QuestionnaireAnswerDesk';
 import { ReadinessScanner } from './components/ReadinessScanner';
 import { SignalCarousel } from './components/SignalCarousel';
 import { TrustPacketStudio } from './components/TrustPacketStudio';
@@ -24,6 +25,7 @@ function App() {
             <a href="#services">Services</a>
             <a href="#validator">Validator</a>
             <a href="#proof-studio">Proof Studio</a>
+            <a href="#answer-desk">Answer Desk</a>
             <a href="#action-plan">Action Plan</a>
             <a href="#contact">Contact</a>
           </div>
@@ -94,6 +96,8 @@ function App() {
       <LaunchValidator />
 
       <TrustPacketStudio />
+
+      <QuestionnaireAnswerDesk />
 
       <ActionPlanBuilder />
 
