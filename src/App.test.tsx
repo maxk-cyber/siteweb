@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import App from './App';
+import { ReadinessScanner } from './components/ReadinessScanner';
 
 describe('App', () => {
   it('renders the product-led hero and default readiness score', () => {
@@ -44,13 +45,9 @@ describe('App', () => {
 
   it('copies a shareable scanner summary when the clipboard is available', async () => {
     const writeText = vi.fn().mockResolvedValue(undefined);
-    Object.defineProperty(window.navigator, 'clipboard', {
-      configurable: true,
-      get: () => ({ writeText }),
-    });
 
     const user = userEvent.setup();
-    render(<App />);
+    render(<ReadinessScanner clipboard={{ writeText }} />);
 
     await user.click(screen.getByRole('button', { name: /copy share summary/i }));
 

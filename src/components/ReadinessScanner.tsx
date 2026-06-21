@@ -46,7 +46,11 @@ const trainingOptions: Option<TrainingCadence>[] = [
   { label: 'Quarterly', value: 'quarterly' },
 ];
 
-export function ReadinessScanner() {
+type ReadinessScannerProps = {
+  clipboard?: Pick<Clipboard, 'writeText'>;
+};
+
+export function ReadinessScanner({ clipboard: clipboardClient }: ReadinessScannerProps = {}) {
   const [answers, setAnswers] = useState<ReadinessAnswers>(defaultAnswers);
   const [copyStatus, setCopyStatus] = useState('Copy share summary');
   const result = useMemo(() => calculateReadiness(answers), [answers]);
@@ -62,7 +66,7 @@ export function ReadinessScanner() {
   const shareSummary = `${result.tier} (${result.score}/100): ${result.headline} ${result.recommendation}`;
 
   const copySummary = async () => {
-    const clipboard = window.navigator.clipboard;
+    const clipboard = clipboardClient ?? window.navigator.clipboard;
 
     if (!clipboard) {
       setCopyStatus('Summary ready to copy');
