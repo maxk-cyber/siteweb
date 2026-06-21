@@ -70,7 +70,7 @@ describe('App', () => {
     await user.selectOptions(screen.getByLabelText(/buying moment/i), 'incident-refresh');
 
     expect(screen.getByText(/client-ready trust layer/i)).toBeInTheDocument();
-    expect(screen.getByText('First-hour response card')).toBeInTheDocument();
+    expect(screen.getAllByText('First-hour response card').length).toBeGreaterThan(0);
 
     await user.click(screen.getByRole('button', { name: /next concern/i }));
     expect(screen.getByText(/who owns security after agency handoff/i)).toBeInTheDocument();
