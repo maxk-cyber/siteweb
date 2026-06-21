@@ -279,6 +279,8 @@ main {
 .scanner-card,
 .signal-card,
 .service-card,
+.studio-card,
+.asset-card,
 .flow-card,
 .cta-section {
   border: 1px solid var(--line);
@@ -303,6 +305,10 @@ main {
 .cta-section p,
 .service-card p,
 .signal-card p,
+.packet-hero p,
+.asset-card p,
+.objection-panel p,
+.handoff-panel li,
 .flow-body p {
   color: var(--muted);
   line-height: 1.7;
@@ -564,6 +570,144 @@ main {
   list-style: none;
 }
 
+.trust-studio {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.68fr) minmax(420px, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+  padding-top: 48px;
+}
+
+.trust-studio::before {
+  position: absolute;
+  top: 8%;
+  left: 46%;
+  z-index: -1;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 999px;
+  content: "";
+  background: radial-gradient(circle, rgba(109, 125, 255, 0.2), transparent 68%);
+  filter: blur(4px);
+}
+
+.studio-card {
+  display: grid;
+  gap: 22px;
+  padding: clamp(22px, 4vw, 34px);
+  border-radius: 34px;
+  animation: riseIn 650ms ease both;
+}
+
+.studio-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.packet-hero {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid rgba(131, 255, 191, 0.24);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(131, 255, 191, 0.1), transparent 38%),
+    rgba(255, 255, 255, 0.045);
+}
+
+.packet-hero h3,
+.objection-panel h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.45rem, 3vw, 2.1rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.packet-meter {
+  display: grid;
+  width: 104px;
+  height: 104px;
+  place-items: center;
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at center, #0c142b 58%, transparent 60%),
+    conic-gradient(var(--cyan) var(--packet-score), rgba(255, 255, 255, 0.12) 0);
+  box-shadow: inset 0 0 24px rgba(77, 232, 255, 0.12);
+}
+
+.packet-meter span {
+  margin-top: 12px;
+  font-size: 2.1rem;
+  font-weight: 900;
+}
+
+.packet-meter small {
+  margin-top: -32px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.asset-card {
+  min-height: 210px;
+  padding: 20px;
+  border-radius: 24px;
+}
+
+.asset-card span,
+.objection-panel strong {
+  color: var(--green);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.asset-card h4 {
+  margin: 24px 0 10px;
+  color: var(--text);
+  font-size: 1.08rem;
+}
+
+.objection-panel,
+.handoff-panel {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.objection-panel {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+}
+
+.handoff-panel {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 22px;
+  align-items: center;
+  padding: 24px;
+}
+
+.handoff-panel ol {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 22px;
+}
+
 .launch-flow {
   display: grid;
   grid-template-columns: minmax(0, 0.74fr) minmax(360px, 1fr);
@@ -647,6 +791,7 @@ main {
 @media (max-width: 960px) {
   .hero-grid,
   .signal-section,
+  .trust-studio,
   .launch-flow {
     grid-template-columns: 1fr;
   }
@@ -657,6 +802,10 @@ main {
 
   .service-grid {
     grid-template-columns: 1fr;
+  }
+
+  .asset-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .service-card {
@@ -684,7 +833,10 @@ main {
   .nav-links,
   .proof-strip,
   .scanner-grid,
+  .studio-controls,
   .score-panel,
+  .packet-hero,
+  .handoff-panel,
   .signal-topline,
   .payoff {
     grid-template-columns: 1fr;
@@ -698,6 +850,7 @@ main {
 
   .proof-strip,
   .scanner-grid,
+  .studio-controls,
   .score-panel {
     display: grid;
   }
@@ -718,6 +871,10 @@ main {
     margin: 0 auto;
   }
 
+  .packet-meter {
+    margin: 0 auto;
+  }
+
   .payoff strong {
     text-align: left;
   }
@@ -727,6 +884,14 @@ main {
   }
 
   .signal-card {
+    min-height: auto;
+  }
+
+  .asset-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .asset-card {
     min-height: auto;
   }
 }

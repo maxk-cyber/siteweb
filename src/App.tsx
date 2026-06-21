@@ -1,6 +1,7 @@
 import { LaunchNavigator } from './components/LaunchNavigator';
 import { ReadinessScanner } from './components/ReadinessScanner';
 import { SignalCarousel } from './components/SignalCarousel';
+import { TrustPacketStudio } from './components/TrustPacketStudio';
 import { proofPoints, services } from './data/siteContent';
 import './styles.css';
 
@@ -19,6 +20,7 @@ function App() {
           <div className="nav-links">
             <a href="#signals">Signals</a>
             <a href="#services">Services</a>
+            <a href="#proof-studio">Proof Studio</a>
             <a href="#contact">Contact</a>
           </div>
         </nav>
@@ -84,6 +86,8 @@ function App() {
           ))}
         </div>
       </section>
+
+      <TrustPacketStudio />
 
       <LaunchNavigator />
 
