@@ -1,5 +1,6 @@
 import { ActionPlanBuilder } from './components/ActionPlanBuilder';
 import { LaunchNavigator } from './components/LaunchNavigator';
+import { LaunchValidator } from './components/LaunchValidator';
 import { ReadinessScanner } from './components/ReadinessScanner';
 import { SignalCarousel } from './components/SignalCarousel';
 import { TrustPacketStudio } from './components/TrustPacketStudio';
@@ -21,6 +22,7 @@ function App() {
           <div className="nav-links">
             <a href="#signals">Signals</a>
             <a href="#services">Services</a>
+            <a href="#validator">Validator</a>
             <a href="#proof-studio">Proof Studio</a>
             <a href="#action-plan">Action Plan</a>
             <a href="#contact">Contact</a>
@@ -89,6 +91,8 @@ function App() {
         </div>
       </section>
 
+      <LaunchValidator />
+
       <TrustPacketStudio />
 
       <ActionPlanBuilder />
@@ -104,7 +108,7 @@ function App() {
             map and the next trust-building sprint.
           </p>
         </div>
-        <a className="button button-primary" href="mailto:hello@maxk-cyber.example?subject=Launch%20readiness%20scan">
+        <a className="button button-primary" href="mailto:hello@maxk-cyber.com?subject=Launch%20readiness%20scan">
           Start a readiness conversation
         </a>
       </section>
