@@ -1,12 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { ActionPlanBuilder } from './components/ActionPlanBuilder';
 import { LaunchValidator } from './components/LaunchValidator';
 import { QuestionnaireAnswerDesk } from './components/QuestionnaireAnswerDesk';
 import { ReadinessScanner } from './components/ReadinessScanner';
 import { TrustPacketStudio } from './components/TrustPacketStudio';
+import { EXPERIENCE_STORAGE_KEY } from './lib/uiPreferences';
 
 function createMemoryStorage() {
   const values = new Map<string, string>();
@@ -21,6 +22,12 @@ function createMemoryStorage() {
 }
 
 describe('App', () => {
+  afterEach(() => {
+    window.localStorage.removeItem(EXPERIENCE_STORAGE_KEY);
+    document.documentElement.removeAttribute('data-motion');
+    document.documentElement.removeAttribute('data-vibe');
+  });
+
   it('renders the product-led hero and default readiness score', () => {
     render(<App />);
 
@@ -31,6 +38,38 @@ describe('App', () => {
     ).toBeInTheDocument();
     expect(screen.getByText('63')).toBeInTheDocument();
     expect(screen.getByText('Trust Builder')).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: /trust cockpit quick actions/i })).toBeInTheDocument();
+    expect(screen.getByText(/answer security questions before they enter the deal room/i)).toBeInTheDocument();
+  });
+
+  it('persists vibe and motion controls with keyboard shortcuts', async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    expect(document.documentElement).toHaveAttribute('data-vibe', 'aurora');
+    expect(document.documentElement).toHaveAttribute('data-motion', 'cinematic');
+
+    await user.click(screen.getByRole('button', { name: /cycle vibe/i }));
+    expect(document.documentElement).toHaveAttribute('data-vibe', 'terminal');
+
+    await user.keyboard('m');
+    expect(document.documentElement).toHaveAttribute('data-motion', 'calm');
+    expect(screen.getByRole('button', { name: /current motion: calm/i })).toBeInTheDocument();
+
+    expect(window.localStorage.getItem(EXPERIENCE_STORAGE_KEY)).toContain('"motion":"calm"');
+  });
+
+  it('cycles the hero proof deck with iterator controls', async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole('button', { name: /next proof state/i }));
+
+    expect(screen.getByText(/show clients exactly what is safe to launch/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /show agency handoff proof state/i })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
   });
 
   it('updates readiness recommendations from scanner inputs', async () => {
