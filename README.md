@@ -9,6 +9,10 @@ The site is built as a product-led trust experience rather than a static
 brochure. It includes:
 
 - An interactive readiness scan with a shareable recommendation summary.
+- A premium trust-cockpit shell with vibe modes, motion intensity controls,
+  keyboard shortcuts, quick-action dock navigation, and reduced-motion support.
+- ReactBits-inspired aurora, click-spark, magnetic CTA, rotating text, and
+  spotlight-card effects adapted without heavy runtime dependencies.
 - A rotating market-signal gallery for current buyer and threat pressures.
 - A Launch Validator that checks public URL, HTTPS, security contact, privacy,
   auth/data fit, proof URLs, and copyable validation summaries.

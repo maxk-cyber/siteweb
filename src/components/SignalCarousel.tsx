@@ -1,4 +1,5 @@
 import { signals } from '../data/siteContent';
+import { SpotlightCard } from './ExperienceShell';
 import { useIterator } from '../lib/useIterator';
 
 export function SignalCarousel() {
@@ -17,7 +18,7 @@ export function SignalCarousel() {
       </div>
 
       <div className="signal-shell">
-        <article className="signal-card">
+        <SpotlightCard className="signal-card">
           <div className="signal-topline">
             <span>{signal.eyebrow}</span>
             <strong>{signal.urgency}</strong>
@@ -28,7 +29,7 @@ export function SignalCarousel() {
             <span>Market payoff</span>
             <strong>{signal.payoff}</strong>
           </div>
-        </article>
+        </SpotlightCard>
 
         <div className="carousel-controls" aria-label="Signal carousel controls">
           <button className="icon-button" type="button" onClick={signalIterator.previous}>

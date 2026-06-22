@@ -65,8 +65,206 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba(131, 255, 191, 0.88);
+  outline-offset: 4px;
+}
+
 main {
   overflow: hidden;
+}
+
+.experience-root {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 78px;
+  isolation: isolate;
+}
+
+.aurora-backdrop {
+  position: fixed;
+  inset: -24% -12% auto;
+  z-index: -3;
+  height: 76vh;
+  pointer-events: none;
+  opacity: 0.82;
+  filter: blur(2px) saturate(130%);
+  overflow: hidden;
+}
+
+.aurora-backdrop span {
+  position: absolute;
+  width: 58vw;
+  height: 58vw;
+  min-width: 460px;
+  min-height: 460px;
+  border-radius: 36% 64% 48% 52%;
+  mix-blend-mode: screen;
+  opacity: 0.26;
+  animation: auroraDrift 18s ease-in-out infinite alternate;
+}
+
+.aurora-backdrop span:nth-child(1) {
+  top: 8%;
+  left: -8%;
+  background: radial-gradient(circle, rgba(77, 232, 255, 0.76), transparent 62%);
+}
+
+.aurora-backdrop span:nth-child(2) {
+  top: 0;
+  right: 1%;
+  background: radial-gradient(circle, rgba(180, 92, 255, 0.7), transparent 66%);
+  animation-delay: -6s;
+}
+
+.aurora-backdrop span:nth-child(3) {
+  top: 30%;
+  left: 35%;
+  background: radial-gradient(circle, rgba(131, 255, 191, 0.54), transparent 64%);
+  animation-delay: -11s;
+}
+
+.experience-root[data-vibe="terminal"] .aurora-backdrop span:nth-child(1),
+.experience-root[data-vibe="terminal"] .aurora-backdrop span:nth-child(2),
+.experience-root[data-vibe="terminal"] .aurora-backdrop span:nth-child(3) {
+  border-radius: 18%;
+  opacity: 0.18;
+  filter: hue-rotate(72deg);
+}
+
+.experience-root[data-vibe="pulse"] .aurora-backdrop span {
+  opacity: 0.34;
+  filter: hue-rotate(-42deg) saturate(150%);
+}
+
+.experience-root[data-motion="calm"] .aurora-backdrop span,
+.experience-root[data-motion="calm"] .ambient,
+.experience-root[data-motion="calm"] .question-orbit {
+  animation-play-state: paused;
+}
+
+.experience-controls {
+  position: fixed;
+  top: 104px;
+  right: clamp(14px, 2vw, 30px);
+  z-index: 12;
+  display: grid;
+  gap: 8px;
+  width: min(210px, calc(100vw - 28px));
+  padding: 12px;
+  border: 1px solid rgba(155, 179, 220, 0.28);
+  border-radius: 24px;
+  background: rgba(6, 8, 21, 0.72);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.experience-controls p,
+.experience-controls small {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.experience-controls button {
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, rgba(77, 232, 255, 0.14), transparent),
+    rgba(255, 255, 255, 0.055);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.experience-dock {
+  position: fixed;
+  right: 50%;
+  bottom: 16px;
+  z-index: 12;
+  display: flex;
+  gap: 8px;
+  max-width: calc(100vw - 28px);
+  padding: 8px;
+  border: 1px solid rgba(155, 179, 220, 0.26);
+  border-radius: 999px;
+  background: rgba(6, 8, 21, 0.72);
+  box-shadow: 0 18px 56px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(20px);
+  transform: translateX(50%);
+}
+
+.experience-dock a {
+  display: grid;
+  min-width: 62px;
+  gap: 3px;
+  place-items: center;
+  padding: 8px 10px;
+  border-radius: 999px;
+  color: var(--muted);
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.experience-dock a:hover,
+.experience-dock a:focus-visible {
+  background: rgba(77, 232, 255, 0.13);
+  color: var(--text);
+  transform: translateY(-3px);
+}
+
+.experience-dock span {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgba(77, 232, 255, 0.28);
+  border-radius: 999px;
+  color: var(--cyan);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.experience-dock small {
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.click-spark-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.click-spark {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+}
+
+.click-spark i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--green), transparent);
+  box-shadow: 0 0 14px rgba(131, 255, 191, 0.78);
+  transform: rotate(calc(var(--ray-index) * 45deg)) translateX(0);
+  transform-origin: left center;
+  animation: sparkRay 620ms ease-out forwards;
 }
 
 .hero {
@@ -234,6 +432,17 @@ main {
   box-shadow: 0 18px 50px rgba(77, 232, 255, 0.24);
 }
 
+.magnetic-target {
+  --magnet-x: 0px;
+  --magnet-y: 0px;
+  transform: translate3d(var(--magnet-x), var(--magnet-y), 0);
+}
+
+.magnetic-target:hover,
+.magnetic-target:focus-visible {
+  transform: translate3d(var(--magnet-x), calc(var(--magnet-y) - 2px), 0);
+}
+
 .button-secondary,
 .button-ghost,
 .icon-button {
@@ -273,6 +482,138 @@ main {
   color: var(--muted);
 }
 
+.hero-proof-deck {
+  position: relative;
+  max-width: 680px;
+  margin-top: 28px;
+  padding: 20px;
+  border: 1px solid rgba(77, 232, 255, 0.22);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at var(--spotlight-x, 20%) var(--spotlight-y, 20%), rgba(77, 232, 255, 0.16), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
+    rgba(255, 255, 255, 0.045);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24);
+  overflow: hidden;
+}
+
+.hero-proof-deck::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(77, 232, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(rgba(77, 232, 255, 0.1) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(90deg, black, transparent 76%);
+  opacity: 0.36;
+}
+
+.hero-proof-topline,
+.hero-proof-controls,
+.hero-proof-body div {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-proof-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-proof-topline strong,
+.hero-proof-body p,
+.hero-proof-body strong {
+  color: var(--green);
+}
+
+.hero-proof-body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.hero-proof-body p {
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-proof-body h2 {
+  max-width: 600px;
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.45rem, 3vw, 2.45rem);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+.hero-proof-body div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+  padding-top: 8px;
+}
+
+.hero-proof-body strong {
+  display: grid;
+  width: 74px;
+  height: 74px;
+  place-items: center;
+  border: 1px solid rgba(131, 255, 191, 0.34);
+  border-radius: 24px;
+  background: rgba(131, 255, 191, 0.08);
+  font-size: 1.55rem;
+  box-shadow: inset 0 0 24px rgba(131, 255, 191, 0.12);
+}
+
+.hero-proof-body span {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.hero-proof-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.hero-proof-controls button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 900;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.hero-proof-controls button:hover,
+.hero-proof-controls button:focus-visible,
+.hero-proof-controls button[aria-pressed="true"] {
+  background: rgba(77, 232, 255, 0.14);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
 .hero-panel {
   animation: riseIn 650ms ease both;
 }
@@ -296,6 +637,30 @@ main {
     var(--panel);
   box-shadow: var(--shadow);
   backdrop-filter: blur(22px);
+}
+
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: radial-gradient(
+    320px circle at var(--spotlight-x, 50%) var(--spotlight-y, 0%),
+    rgba(77, 232, 255, 0.22),
+    transparent 44%
+  );
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.spotlight-card:hover::before,
+.spotlight-card:focus-within::before {
+  opacity: 1;
 }
 
 .scanner-card {
@@ -1300,6 +1665,28 @@ main {
   }
 }
 
+@keyframes auroraDrift {
+  0% {
+    transform: translate3d(-4%, 2%, 0) rotate(0deg) scale(0.96);
+  }
+
+  100% {
+    transform: translate3d(8%, 10%, 0) rotate(18deg) scale(1.08);
+  }
+}
+
+@keyframes sparkRay {
+  0% {
+    opacity: 1;
+    transform: rotate(calc(var(--ray-index) * 45deg)) translateX(0) scaleX(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(calc(var(--ray-index) * 45deg)) translateX(34px) scaleX(0.18);
+  }
+}
+
 @keyframes riseIn {
   from {
     opacity: 0;
@@ -1409,13 +1796,15 @@ main {
 
   .hero-actions,
   .carousel-controls,
-  .flow-controls {
+  .flow-controls,
+  .hero-proof-controls {
     align-items: stretch;
     flex-direction: column;
   }
 
   .button,
-  .icon-button {
+  .icon-button,
+  .hero-proof-controls button {
     width: 100%;
   }
 
@@ -1441,6 +1830,30 @@ main {
 
   .payoff strong {
     text-align: left;
+  }
+
+  .hero-proof-body div {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-proof-body strong {
+    width: 100%;
+  }
+
+  .experience-controls {
+    position: static;
+    width: auto;
+    margin: 0 14px 18px;
+  }
+
+  .experience-dock {
+    justify-content: flex-start;
+    overflow-x: auto;
+    border-radius: 24px;
+  }
+
+  .experience-dock a {
+    min-width: 56px;
   }
 
   .section {
@@ -1476,5 +1889,9 @@ main {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .click-spark-stage {
+    display: none;
   }
 }
